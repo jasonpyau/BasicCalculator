@@ -237,6 +237,12 @@
         if (num1%1 != 0 && num1 != 0) {
           num1Digit /= 10;
         }
+        else if (num1Digit < 1 && num == 0) {
+          if (num1Digit == 0.1) {
+            resultText.textContent = num1+".0";
+          }
+          num1Digit /= 10;
+        }
         else {
           num1Digit *= 10;
         }
@@ -245,6 +251,12 @@
         num2 = (num2Digit >= 1) ? (num2*10)+num : num2+(num*num2Digit);
         resultText.textContent = (num2 % 1 == 0)? num2 : parseFloat(num2).toFixed(10);
         if (num2%1 != 0 && num2 != 0) {
+          num2Digit /= 10;
+        }
+        else if (num2Digit < 1 && num == 0) {
+          if (num2Digit == 0.1) {
+            resultText.textContent = num2+".0";
+          }
           num2Digit /= 10;
         }
         else {
