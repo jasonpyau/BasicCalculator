@@ -301,10 +301,12 @@
 
     function operatorButtonClicked(operator) {
       if (operation != "none" && num2 != 0) {
-        operation = operator;
         findResult();
+        num1 = result;
+        operation = operator;
+        return;
       }
-      if (operation == "none" && num1 == 0) {
+      else if (operation == "none" && num1 == 0) {
         num1 = result;
         operation = operator;
       }
