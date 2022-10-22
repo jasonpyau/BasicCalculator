@@ -1,0 +1,379 @@
+<html>
+
+<head>
+  <title>BasicCalculator</title>
+</head>
+
+<style>
+  button {
+    padding-right: 1%;
+    width: 23%;
+    height: 15%;
+    border-style: none;
+    background: #ebf0f7;
+  }
+
+  #calculator {
+    width:50%; 
+    padding:5%; 
+    max-width: 600px; 
+    min-width:50px; 
+    height:400px;
+  }
+
+  #result {
+    background: #dce3e6; 
+    text-align: right; 
+    padding-right: 5%; 
+    height: 12%; 
+    font-size: 25px;
+  }
+
+
+  #equal {
+    width: 47%;
+  }
+
+</style>
+
+
+
+<body>
+  <center>
+    <center id="calculator">
+      <center id="result">
+        0
+      </center>
+
+      <button id="AC">
+        AC
+      </button>
+
+      <button id="plusMinus">
+        +/-
+      </button>
+
+      <button id="mod">
+        %
+      </button>
+
+      <button id="divide">
+        /
+      </button>
+
+      <button id="7">
+        7
+      </button>
+
+      <button id="8">
+        8
+      </button>
+
+      <button id="nine">
+        9
+      </button>
+
+      <button id="multiply">
+        *
+      </button>
+
+      <button id="4">
+        4
+      </button>
+
+      <button id="5">
+        5
+      </button>
+
+      <button id="6">
+        6
+      </button>
+
+      <button id="subtract">
+        -
+      </button>
+
+      <button id="1">
+        1
+      </button>
+
+      <button id="2">
+        2
+      </button>
+
+      <button id="3"">
+        3
+      </button>
+
+      <button id="add">
+        +
+      </button>
+
+      <button id="0">
+        0
+      </button>
+
+      <button id="period">
+        .
+      </button>
+
+      <button id="equal">
+        =
+      </button>
+
+
+    </center>
+  </center>
+
+  <script>
+    let result = 0;
+    let num1 = 0;
+    let num1Digit = 1;
+    let num2 = 0;
+    let num2Digit = 1;
+    let operation = "none";
+    
+    let resultText = document.getElementById("result");
+    let ACButton = document.getElementById("AC");
+    let plusMinusButton = document.getElementById("plusMinus");
+    let modButton = document.getElementById("mod");
+    let zeroButton = document.getElementById("0");
+    let oneButton = document.getElementById("1");
+    let twoButton = document.getElementById("2");
+    let threeButton = document.getElementById("3");
+    let fourButton = document.getElementById("4");
+    let fiveButton = document.getElementById("5");
+    let sixButton = document.getElementById("6");
+    let sevenButton = document.getElementById("7");
+    let eightButton = document.getElementById("8");
+    let nineButton = document.getElementById("nine");
+    let divideButton = document.getElementById("divide");
+    let multiplyButton = document.getElementById("multiply");
+    let subtractButton = document.getElementById("subtract");
+    let addButton = document.getElementById("add");
+    let periodButton = document.getElementById("period");
+    let deleteButton = document.getElementById("delete");
+    let equalButton = document.getElementById("equal");
+  
+    document.addEventListener("keydown", function(e) {
+      if (e.key >= 0 && e.key <= 9) {
+        numButtonClicked(parseInt(e.key));
+      }
+      else if (e.key == "+") {
+        operatorButtonClicked("add");
+      }
+      else if (e.key == "-") {
+        operatorButtonClicked("subtract");
+      }
+      else if (e.key == "*") {
+        operatorButtonClicked("multiply");
+      }
+      else if (e.key == "/") {
+        operatorButtonClicked("divide");
+      }
+      else if (e.key == "%") {
+        operatorButtonClicked("mod");
+      }
+      else if (e.key == ".") {
+        periodButtonClicked();
+      }
+      else if (e.key == "=" || e.key == "Enter") {
+        equalButtonClicked();
+      }
+    });
+                              
+    
+    zeroButton.onclick = function () {
+      numButtonClicked(0);
+    }
+    oneButton.onclick = function () {
+      numButtonClicked(1);
+    }
+    twoButton.onclick = function () {
+      numButtonClicked(2);
+    }
+    threeButton.onclick = function () {
+      numButtonClicked(3);
+    }
+    fourButton.onclick = function () {
+      numButtonClicked(4);
+    }
+    fiveButton.onclick = function () {
+      numButtonClicked(5);
+    }
+    sixButton.onclick = function () {
+      numButtonClicked(6);
+    }
+    sevenButton.onclick = function () {
+      numButtonClicked(7);
+    }
+    eightButton.onclick = function () {
+      numButtonClicked(8);
+    }
+    nineButton.onclick = function () {
+      numButtonClicked(9);
+    }
+    
+    addButton.onclick = function () {
+      operatorButtonClicked("add");
+    }
+    subtractButton.onclick = function () {
+      operatorButtonClicked("subtract");
+    }
+    multiplyButton.onclick = function () {
+      operatorButtonClicked("multiply");
+    }
+    divideButton.onclick = function () {
+      operatorButtonClicked("divide");
+    }
+    modButton.onclick = function () {
+      operatorButtonClicked("mod");
+    }
+    
+    function numButtonClicked(num) {
+      if (operation == "none") {
+        num1 = (num1Digit >= 1) ? (num1*10)+num : num1+(num*num1Digit);
+        resultText.textContent = (num1 % 1 == 0)? num1 : parseFloat(num1).toFixed(10);
+        if (num1%1 != 0 && num1 != 0) {
+          num1Digit /= 10;
+        }
+        else {
+          num1Digit *= 10;
+        }
+      }
+      else {
+        num2 = (num2Digit >= 1) ? (num2*10)+num : num2+(num*num2Digit);
+        resultText.textContent = (num2 % 1 == 0)? num2 : parseFloat(num2).toFixed(10);
+        if (num2%1 != 0 && num2 != 0) {
+          num2Digit /= 10;
+        }
+        else {
+          num2Digit *= 10;
+        }
+      }
+    }
+
+    periodButton.onclick = function() {
+      periodButtonClicked();
+    }
+
+    ACButton.onclick = function() {
+      result = 0;
+      num1 = 0;
+      num1Digit = 1;
+      num2 = 0;
+      num2Digit = 1;
+      operation = "none";
+      resultText.textContent = "0";
+    }
+
+    plusMinusButton.onclick = function() {
+      if (operation == "none") {
+        if (result != 0 && num1 == 0) {
+          num1 = result;
+        }
+        num1 = 0 - num1;
+        resultText.textContent = num1;
+      }
+      else if (num2 != 0) {
+        num2 = 0 - num2;
+        resultText.textContent = num2;
+      }
+    }
+
+    function periodButtonClicked() {
+      if (operation == "none") {
+        if (result != 0 && num1 == 0) {
+          num1 = result;
+        }
+        if (num1 % 1 == 0 || num1 == 0) {
+          num1Digit = 0.1;
+          resultText.textContent = num1+".";
+        }
+      }
+      else {
+          if (num2 % 1 == 0 || num1 == 0) {
+            num2Digit = 0.1;
+            resultText.textContent = num2+".";
+        }
+      }
+    }
+
+    function operatorButtonClicked(operator) {
+      if (operation != "none" && num2 != 0) {
+        operation = operator;
+        findResult();
+      }
+      if (operation == "none" && num1 == 0) {
+        num1 = result;
+        operation = operator;
+      }
+      else {
+        operation = operator;
+      }
+      
+      if (operator == "add") {
+        resultText.textContent = "+";
+      }
+      else if (operator == "subtract") {
+        resultText.textContent = "-";
+      }
+      if (operator == "multiply") {
+        resultText.textContent = "*";
+      }
+      if (operator == "divide") {
+        resultText.textContent = "/";
+      }
+      if (operator == "mod") {
+        resultText.textContent = "%";
+      }
+        
+    }
+
+    equalButton.onclick = function () {
+      equalButtonClicked();
+    }
+
+    function equalButtonClicked() {
+      if (operation != "none") {
+        let text = resultText.textContent;
+        if (num2 == 0 && (text == "+" || text == "-" || text == "*" || text == "/" || text == "%")) {
+          num2 = num1;
+        } 
+        findResult();
+      }
+    }
+
+    function findResult() {
+      if (operation == "add") {
+        result = num1 + num2;
+      }
+      else if (operation == "subtract") {
+        result = num1 - num2;
+      }
+      else if (operation == "multiply") {
+        result = num1 * num2;
+      }
+      else if (operation == "divide") {
+        result = num1 / num2;
+      }
+      else if (operation == "mod") {
+        result = num1 % num2;
+      }
+      num1 = 0;
+      num1Digit = 1;
+      num2 = 0;
+      num2Digit = 1;
+      operation = "none";
+      resultText.textContent = result;
+    }
+
+  </script>
+
+  <div style= "position: absolute; bottom: 15px; right: 15px; font-size: 18px">
+      Github @jasonpyau
+  </div>
+  
+</body>
+
+</html>
